@@ -1,19 +1,26 @@
+#ifndef CPPPC__A03__LIST_H__INCLUDED
+#define CPPPC__A03__LIST_H__INCLUDED
+
 #include <iterator>
 
 namespace cpppc {
 
   // list<int32_t, -1>
-  template <
-    typename ValueT,
-    ValueT   default_value = ValueT()>
+  template <typename ValueT, ValueT default_value = ValueT()>
+ //   ValueT   default_value = ValueT()>
   class list {
     typedef list<ValueT, default_value> self_t;
 
   public:
+    struct list_node {
+       list_node * next;
+       ValueT      value;
+    };
     // list<T>::iterator
     class iterator {
-	//TODO I get an "expected nested-name-specifier" error here.. why?
-       typedef typename list<ValueT, default_value> list_t;
+	//TODO I get an "expected nested-name-specifier" error if I use typename.. why?
+       //typedef typename list<ValueT, default_value> list_t;
+       typedef list<ValueT, default_value> list_t;
        typedef typename list_t::list_node list_node_t;
        typedef typename list_t::iterator self_t;
     public:
@@ -57,14 +64,10 @@ namespace cpppc {
 
     private:
        list_node_t * _list_node;
-       //TODO: you didn't put list in here, but you define it in line 23. Am I right in thinking it needs to go here, too?
-       list_t _list;
+       //TODO: you didn't put list in here, but you forward-declare it in line 23. Am I right in thinking it needs to go here, too? I get a compiler error here--> binding 'const list_t' to reference of type 'list_t::iterator::list_t&' discards qualifiers
+       list_t & _list;
     };
 
-    struct list_node {
-       list_node * next;
-       ValueT      value;
-    };
     
   public:
     list()
@@ -77,7 +80,7 @@ namespace cpppc {
     list(const self_t & other)             = default;
     self_t & operator=(const self_t & rhs) = default;
 
-    bool operator==(const list & other)
+    bool operator==(const self_t & other)
     {
 //	if (this == &other) //identity
 //	    return true;
@@ -100,11 +103,16 @@ namespace cpppc {
     // list<int> l;
     // l_begin = l.begin();
     // ++l_begin;
-    iterator begin()  { _begin; }
-    //TODO: is this the same as saying { return _begin; } ?
+    iterator begin()  
+    { 
+	return _begin; 
+    }
     // list<T> l;
     // *l.end();
-    iterator end()    { _end; }
+    iterator end()    
+    { 
+	return _end; 
+    }
 
     size_t size() const
     {
@@ -166,7 +174,7 @@ namespace cpppc {
   private:
     // same as = { }
     list_node _head        = { nullptr, default_value };
-    static list_node _tail = { nullptr, default_value };
+    static constexpr list_node _tail = { nullptr, default_value };
     size_t _size = 0;
 
     // self_t * this
@@ -176,4 +184,4 @@ namespace cpppc {
   };
 
 }
-
+#endif // CPPPC__A03__LIST_H__INCLUDED
