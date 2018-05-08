@@ -1,0 +1,17 @@
+!_TAG_FILE_SORTED	2	/0=unsorted, 1=sorted, 2=foldcase/
+CFLAGS	/home/rskletza/Documents/Uni/CPPPC/assignment-02/test/Makefile	/^CFLAGS=-std=c++11 -Wall -Wextra -pedantic$/;"	m	language:Make
+CPPPC__01__VECTOR_TEST_H__INCLUDED	/home/rskletza/Documents/Uni/CPPPC/assignment-02/test/vector_test.h	2;"	d	language:C++
+CXX	/home/rskletza/Documents/Uni/CPPPC/assignment-02/test/Makefile	/^CXX?=g++  # clang++$/;"	m	language:Make
+INCLUDES	/home/rskletza/Documents/Uni/CPPPC/assignment-02/test/Makefile	/^INCLUDES=-I${GTEST_BASE}\/include -I..\/$/;"	m	language:Make
+LDFLAGS	/home/rskletza/Documents/Uni/CPPPC/assignment-02/test/Makefile	/^LDFLAGS=-lpthread -L${GTEST_BASE}\/lib -lgtest$/;"	m	language:Make
+OBJS	/home/rskletza/Documents/Uni/CPPPC/assignment-02/test/Makefile	/^OBJS = testsuite.o \\$/;"	m	language:Make
+SetUp	/home/rskletza/Documents/Uni/CPPPC/assignment-02/test/vector_test.h	/^  virtual void SetUp() {$/;"	f	language:C++	class:VectorTest
+TearDown	/home/rskletza/Documents/Uni/CPPPC/assignment-02/test/vector_test.h	/^  virtual void TearDown() {$/;"	f	language:C++	class:VectorTest
+TEST_F	/home/rskletza/Documents/Uni/CPPPC/assignment-02/test/vector_test.cc	/^TEST_F(VectorTest, StandardConcept)$/;"	f	language:C++
+TEST_F	/home/rskletza/Documents/Uni/CPPPC/assignment-02/test/vector_test.cc	/^TEST_F(VectorTest, VectorConcept)$/;"	f	language:C++
+TEST_F	/home/rskletza/Documents/Uni/CPPPC/assignment-02/test/vector_test.cc	/^TEST_F(VectorTest, VectorFIFO)$/;"	f	language:C++
+TEST_F	/home/rskletza/Documents/Uni/CPPPC/assignment-02/test/vector_test.cc	/^TEST_F(VectorTest, VectorLIFO)$/;"	f	language:C++
+TEST_F	/home/rskletza/Documents/Uni/CPPPC/assignment-02/test/vector_test.cc	/^TEST_F(VectorTest, VectorReverse)$/;"	f	language:C++
+VectorTest	/home/rskletza/Documents/Uni/CPPPC/assignment-02/test/vector_test.h	/^  VectorTest() {$/;"	f	language:C++	class:VectorTest
+VectorTest	/home/rskletza/Documents/Uni/CPPPC/assignment-02/test/vector_test.h	/^class VectorTest : public ::testing::Test {$/;"	c	language:C++
+~VectorTest	/home/rskletza/Documents/Uni/CPPPC/assignment-02/test/vector_test.h	/^  virtual ~VectorTest() {$/;"	f	language:C++	class:VectorTest

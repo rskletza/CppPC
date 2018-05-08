@@ -1,0 +1,39 @@
+!_TAG_FILE_SORTED	2	/0=unsorted, 1=sorted, 2=foldcase/
+begin	/home/rskletza/Documents/Uni/CPPPC/assignment-02/solution/vector.cc	/^VectorIterator Vector::begin() const$/;"	f	language:C++	class:cpppc::Vector
+begin	/home/rskletza/Documents/Uni/CPPPC/assignment-02/solution/vector.h	/^	VectorIterator begin() const;$/;"	p	language:C++	class:cpppc::Vector
+cpppc	/home/rskletza/Documents/Uni/CPPPC/assignment-02/solution/vector.cc	/^namespace cpppc $/;"	n	language:C++	file:
+cpppc	/home/rskletza/Documents/Uni/CPPPC/assignment-02/solution/vector.h	/^namespace cpppc $/;"	n	language:C++
+CPPPC__02__VECTOR_H__INCLUDED	/home/rskletza/Documents/Uni/CPPPC/assignment-02/solution/vector.h	2;"	d	language:C++
+empty	/home/rskletza/Documents/Uni/CPPPC/assignment-02/solution/vector.cc	/^bool Vector::empty() const$/;"	f	language:C++	class:cpppc::Vector
+empty	/home/rskletza/Documents/Uni/CPPPC/assignment-02/solution/vector.h	/^	bool empty() const;$/;"	p	language:C++	class:cpppc::Vector
+end	/home/rskletza/Documents/Uni/CPPPC/assignment-02/solution/vector.cc	/^VectorIterator Vector::end() const$/;"	f	language:C++	class:cpppc::Vector
+end	/home/rskletza/Documents/Uni/CPPPC/assignment-02/solution/vector.h	/^	VectorIterator end() const;$/;"	p	language:C++	class:cpppc::Vector
+operator =	/home/rskletza/Documents/Uni/CPPPC/assignment-02/solution/vector.cc	/^void Vector::operator=(const Vector & other)$/;"	f	language:C++	class:cpppc::Vector
+operator =	/home/rskletza/Documents/Uni/CPPPC/assignment-02/solution/vector.h	/^	void operator=(const Vector & other);$/;"	p	language:C++	class:cpppc::Vector
+operator ==	/home/rskletza/Documents/Uni/CPPPC/assignment-02/solution/vector.cc	/^bool Vector::operator==(const Vector & other) const$/;"	f	language:C++	class:cpppc::Vector
+operator ==	/home/rskletza/Documents/Uni/CPPPC/assignment-02/solution/vector.h	/^	bool operator==(const Vector & other) const;$/;"	p	language:C++	class:cpppc::Vector
+operator []	/home/rskletza/Documents/Uni/CPPPC/assignment-02/solution/vector.cc	/^VectorElement & Vector::operator[](size_t index) const$/;"	f	language:C++	class:cpppc::Vector
+operator []	/home/rskletza/Documents/Uni/CPPPC/assignment-02/solution/vector.h	/^	VectorElement & operator[](size_t index) const;$/;"	p	language:C++	class:cpppc::Vector
+pop_back	/home/rskletza/Documents/Uni/CPPPC/assignment-02/solution/vector.cc	/^VectorElement Vector::pop_back()$/;"	f	language:C++	class:cpppc::Vector
+pop_back	/home/rskletza/Documents/Uni/CPPPC/assignment-02/solution/vector.h	/^	VectorElement pop_back();$/;"	p	language:C++	class:cpppc::Vector
+pop_front	/home/rskletza/Documents/Uni/CPPPC/assignment-02/solution/vector.cc	/^VectorElement Vector::pop_front()$/;"	f	language:C++	class:cpppc::Vector
+pop_front	/home/rskletza/Documents/Uni/CPPPC/assignment-02/solution/vector.h	/^	VectorElement pop_front();$/;"	p	language:C++	class:cpppc::Vector
+push_back	/home/rskletza/Documents/Uni/CPPPC/assignment-02/solution/vector.cc	/^void Vector::push_back(const VectorElement val)$/;"	f	language:C++	class:cpppc::Vector
+push_back	/home/rskletza/Documents/Uni/CPPPC/assignment-02/solution/vector.h	/^	void push_back(const VectorElement value);$/;"	p	language:C++	class:cpppc::Vector
+push_front	/home/rskletza/Documents/Uni/CPPPC/assignment-02/solution/vector.cc	/^void Vector::push_front(VectorElement val)$/;"	f	language:C++	class:cpppc::Vector
+push_front	/home/rskletza/Documents/Uni/CPPPC/assignment-02/solution/vector.h	/^	void push_front(VectorElement value);$/;"	p	language:C++	class:cpppc::Vector
+reverse	/home/rskletza/Documents/Uni/CPPPC/assignment-02/solution/vector.cc	/^void Vector::reverse()$/;"	f	language:C++	class:cpppc::Vector
+reverse	/home/rskletza/Documents/Uni/CPPPC/assignment-02/solution/vector.h	/^	void		reverse();$/;"	p	language:C++	class:cpppc::Vector
+size	/home/rskletza/Documents/Uni/CPPPC/assignment-02/solution/vector.cc	/^size_t Vector::size() const$/;"	f	language:C++	class:cpppc::Vector
+size	/home/rskletza/Documents/Uni/CPPPC/assignment-02/solution/vector.h	/^	size_t size() const;$/;"	p	language:C++	class:cpppc::Vector
+Vector	/home/rskletza/Documents/Uni/CPPPC/assignment-02/solution/vector.cc	/^Vector::Vector()$/;"	f	language:C++	class:cpppc::Vector
+Vector	/home/rskletza/Documents/Uni/CPPPC/assignment-02/solution/vector.cc	/^Vector::Vector(const Vector & other)$/;"	f	language:C++	class:cpppc::Vector
+Vector	/home/rskletza/Documents/Uni/CPPPC/assignment-02/solution/vector.h	/^	Vector();$/;"	p	language:C++	class:cpppc::Vector
+Vector	/home/rskletza/Documents/Uni/CPPPC/assignment-02/solution/vector.h	/^	Vector(const Vector & other);$/;"	p	language:C++	class:cpppc::Vector
+Vector	/home/rskletza/Documents/Uni/CPPPC/assignment-02/solution/vector.h	/^class Vector$/;"	c	language:C++	namespace:cpppc
+VectorElement	/home/rskletza/Documents/Uni/CPPPC/assignment-02/solution/vector.h	/^typedef int             VectorElement;$/;"	t	language:C++	namespace:cpppc
+VectorIterator	/home/rskletza/Documents/Uni/CPPPC/assignment-02/solution/vector.h	/^typedef VectorElement *   VectorIterator;$/;"	t	language:C++	namespace:cpppc
+_count	/home/rskletza/Documents/Uni/CPPPC/assignment-02/solution/vector.h	/^	size_t			_count;$/;"	m	language:C++	class:cpppc::Vector
+_values	/home/rskletza/Documents/Uni/CPPPC/assignment-02/solution/vector.h	/^	VectorElement * _values = nullptr;$/;"	m	language:C++	class:cpppc::Vector
+~Vector	/home/rskletza/Documents/Uni/CPPPC/assignment-02/solution/vector.cc	/^Vector::~Vector()$/;"	f	language:C++	class:cpppc::Vector
+~Vector	/home/rskletza/Documents/Uni/CPPPC/assignment-02/solution/vector.h	/^	~Vector();$/;"	p	language:C++	class:cpppc::Vector

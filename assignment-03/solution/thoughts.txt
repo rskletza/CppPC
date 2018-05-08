@@ -1,0 +1,13 @@
+3-01)
+As already discussed in the session, the difference between these iterators is the operations that can be performed on them.
+
+ForwardIterator vs RandomAccessIterator
+A ForwardIterator can only be incremented, whereas a RandomAccesIterator (for example a pointer) can jump anywhere within the container.
+
+InputIterator vs OutputIterator
+An InputIterator is any kind of iterator that can read from the pointed-to element. However, it only guarantees validity once (single-pass). 
+An OutputIterator is any kind of iterator that can write to the pointed-to element. However, assignment is only allowed once (single-pass). 
+Any Iterator that satisfies the requirements of the OutputIterator is called mutable
+
+I don't quite understand the "single pass" aspect. I can't imagine that it means that you can only read/write once. ..or does it, e.g. for output on stdout?
+

@@ -1,0 +1,114 @@
+!_TAG_FILE_SORTED	2	/0=unsorted, 1=sorted, 2=foldcase/
+CHUNK	/home/rskletza/Documents/Uni/CPPPC/assignment-01/solution/vector.h	6;"	d	language:C++
+CPPPC__01__DEQUE_H__INCLUDED	/home/rskletza/Documents/Uni/CPPPC/assignment-01/solution/deque.h	2;"	d	language:C++
+CPPPC__01__STACK_H__INCLUDED	/home/rskletza/Documents/Uni/CPPPC/assignment-01/solution/stack.h	2;"	d	language:C++
+CPPPC__01__VECTOR_H__INCLUDED	/home/rskletza/Documents/Uni/CPPPC/assignment-01/solution/vector.h	2;"	d	language:C++
+Deque	/home/rskletza/Documents/Uni/CPPPC/assignment-01/solution/deque.h	/^} Deque;$/;"	t	language:C++	typeref:struct:__anon1
+DequeValue	/home/rskletza/Documents/Uni/CPPPC/assignment-01/solution/deque.h	/^typedef int            DequeValue;$/;"	t	language:C++
+deque__assign	/home/rskletza/Documents/Uni/CPPPC/assignment-01/solution/deque.c	/^Deque * deque__assign(Deque * _this, Deque * other)$/;"	f	language:C++
+deque__assign	/home/rskletza/Documents/Uni/CPPPC/assignment-01/solution/deque.h	/^Deque *        deque__assign(Deque * lhs, Deque * rhs);$/;"	p	language:C++
+deque__copy	/home/rskletza/Documents/Uni/CPPPC/assignment-01/solution/deque.c	/^Deque * deque__copy(Deque * orig)$/;"	f	language:C++
+deque__copy	/home/rskletza/Documents/Uni/CPPPC/assignment-01/solution/deque.h	/^Deque *        deque__copy(Deque * other);$/;"	p	language:C++
+deque__delete	/home/rskletza/Documents/Uni/CPPPC/assignment-01/solution/deque.c	/^void deque__delete(Deque * _this)$/;"	f	language:C++
+deque__delete	/home/rskletza/Documents/Uni/CPPPC/assignment-01/solution/deque.h	/^void           deque__delete(Deque * d);$/;"	p	language:C++
+deque__empty	/home/rskletza/Documents/Uni/CPPPC/assignment-01/solution/deque.c	/^int deque__empty(Deque * _this)$/;"	f	language:C++
+deque__empty	/home/rskletza/Documents/Uni/CPPPC/assignment-01/solution/deque.h	/^int            deque__empty(Deque * d);$/;"	p	language:C++
+deque__equals	/home/rskletza/Documents/Uni/CPPPC/assignment-01/solution/deque.c	/^int deque__equals(Deque * d1, Deque * d2)$/;"	f	language:C++
+deque__equals	/home/rskletza/Documents/Uni/CPPPC/assignment-01/solution/deque.h	/^int            deque__equals(Deque * lhs, Deque * rhs);$/;"	p	language:C++
+deque__new	/home/rskletza/Documents/Uni/CPPPC/assignment-01/solution/deque.c	/^Deque * deque__new()$/;"	f	language:C++
+deque__new	/home/rskletza/Documents/Uni/CPPPC/assignment-01/solution/deque.h	/^Deque *        deque__new();$/;"	p	language:C++
+deque__pop_back	/home/rskletza/Documents/Uni/CPPPC/assignment-01/solution/deque.c	/^DequeValue deque__pop_back(Deque * _this)$/;"	f	language:C++
+deque__pop_back	/home/rskletza/Documents/Uni/CPPPC/assignment-01/solution/deque.h	/^DequeValue     deque__pop_back(Deque * d);$/;"	p	language:C++
+deque__pop_front	/home/rskletza/Documents/Uni/CPPPC/assignment-01/solution/deque.c	/^DequeValue deque__pop_front(Deque * _this)$/;"	f	language:C++
+deque__pop_front	/home/rskletza/Documents/Uni/CPPPC/assignment-01/solution/deque.h	/^DequeValue     deque__pop_front(Deque * d);$/;"	p	language:C++
+deque__push_back	/home/rskletza/Documents/Uni/CPPPC/assignment-01/solution/deque.c	/^void deque__push_back(Deque * _this, DequeValue val)$/;"	f	language:C++
+deque__push_back	/home/rskletza/Documents/Uni/CPPPC/assignment-01/solution/deque.h	/^void           deque__push_back(Deque * d, DequeValue value);$/;"	p	language:C++
+deque__push_front	/home/rskletza/Documents/Uni/CPPPC/assignment-01/solution/deque.c	/^void deque__push_front(Deque * _this, DequeValue val)$/;"	f	language:C++
+deque__push_front	/home/rskletza/Documents/Uni/CPPPC/assignment-01/solution/deque.h	/^void           deque__push_front(Deque * d, DequeValue value);$/;"	p	language:C++
+deque__reverse	/home/rskletza/Documents/Uni/CPPPC/assignment-01/solution/deque.c	/^Deque * deque__reverse(Deque * d)$/;"	f	language:C++
+deque__reverse	/home/rskletza/Documents/Uni/CPPPC/assignment-01/solution/deque.h	/^Deque *			deque__reverse(Deque * d);$/;"	p	language:C++
+deque__size	/home/rskletza/Documents/Uni/CPPPC/assignment-01/solution/deque.c	/^int deque__size(Deque * _this)$/;"	f	language:C++
+deque__size	/home/rskletza/Documents/Uni/CPPPC/assignment-01/solution/deque.h	/^int            deque__size(Deque * d);$/;"	p	language:C++
+Stack	/home/rskletza/Documents/Uni/CPPPC/assignment-01/solution/stack.h	/^} Stack;$/;"	t	language:C++	typeref:struct:__anon1
+StackValue	/home/rskletza/Documents/Uni/CPPPC/assignment-01/solution/stack.h	/^typedef int            StackValue;$/;"	t	language:C++
+stack__assign	/home/rskletza/Documents/Uni/CPPPC/assignment-01/solution/stack.c	/^Stack * stack__assign(Stack * _this, Stack * other)$/;"	f	language:C++
+stack__assign	/home/rskletza/Documents/Uni/CPPPC/assignment-01/solution/stack.h	/^Stack *        stack__assign(Stack * lhs, Stack * rhs);$/;"	p	language:C++
+stack__copy	/home/rskletza/Documents/Uni/CPPPC/assignment-01/solution/stack.c	/^Stack * stack__copy(Stack * orig)$/;"	f	language:C++
+stack__copy	/home/rskletza/Documents/Uni/CPPPC/assignment-01/solution/stack.h	/^Stack *        stack__copy(Stack * other);$/;"	p	language:C++
+stack__delete	/home/rskletza/Documents/Uni/CPPPC/assignment-01/solution/stack.c	/^void stack__delete(Stack * _this)$/;"	f	language:C++
+stack__delete	/home/rskletza/Documents/Uni/CPPPC/assignment-01/solution/stack.h	/^void           stack__delete(Stack * s);$/;"	p	language:C++
+stack__empty	/home/rskletza/Documents/Uni/CPPPC/assignment-01/solution/stack.c	/^int stack__empty(Stack * _this)$/;"	f	language:C++
+stack__empty	/home/rskletza/Documents/Uni/CPPPC/assignment-01/solution/stack.h	/^int            stack__empty(Stack * s);$/;"	p	language:C++
+stack__equals	/home/rskletza/Documents/Uni/CPPPC/assignment-01/solution/stack.c	/^int stack__equals(Stack * s1, Stack * s2)$/;"	f	language:C++
+stack__equals	/home/rskletza/Documents/Uni/CPPPC/assignment-01/solution/stack.h	/^int            stack__equals(Stack * lhs, Stack * rhs);$/;"	p	language:C++
+stack__new	/home/rskletza/Documents/Uni/CPPPC/assignment-01/solution/stack.c	/^Stack * stack__new()$/;"	f	language:C++
+stack__new	/home/rskletza/Documents/Uni/CPPPC/assignment-01/solution/stack.h	/^Stack *        stack__new();$/;"	p	language:C++
+stack__pop	/home/rskletza/Documents/Uni/CPPPC/assignment-01/solution/stack.c	/^StackValue stack__pop(Stack * _this)$/;"	f	language:C++
+stack__pop	/home/rskletza/Documents/Uni/CPPPC/assignment-01/solution/stack.h	/^StackValue     stack__pop(Stack * s);$/;"	p	language:C++
+stack__push	/home/rskletza/Documents/Uni/CPPPC/assignment-01/solution/stack.c	/^void stack__push(Stack * _this, StackValue val)$/;"	f	language:C++
+stack__push	/home/rskletza/Documents/Uni/CPPPC/assignment-01/solution/stack.h	/^void           stack__push(Stack * s, StackValue value);$/;"	p	language:C++
+stack__reverse	/home/rskletza/Documents/Uni/CPPPC/assignment-01/solution/stack.c	/^Stack * stack__reverse(Stack * _this)$/;"	f	language:C++
+stack__reverse	/home/rskletza/Documents/Uni/CPPPC/assignment-01/solution/stack.h	/^Stack *			stack__reverse(Stack *);$/;"	p	language:C++
+stack__size	/home/rskletza/Documents/Uni/CPPPC/assignment-01/solution/stack.c	/^int stack__size(Stack * _this)$/;"	f	language:C++
+stack__size	/home/rskletza/Documents/Uni/CPPPC/assignment-01/solution/stack.h	/^int            stack__size(Stack * s);$/;"	p	language:C++
+Vector	/home/rskletza/Documents/Uni/CPPPC/assignment-01/solution/vector.h	/^} Vector;$/;"	t	language:C++	typeref:struct:__anon1
+VectorIterator	/home/rskletza/Documents/Uni/CPPPC/assignment-01/solution/vector.h	/^typedef VectorValue *   VectorIterator;$/;"	t	language:C++
+VectorValue	/home/rskletza/Documents/Uni/CPPPC/assignment-01/solution/vector.h	/^typedef int             VectorValue;$/;"	t	language:C++
+vector__assign	/home/rskletza/Documents/Uni/CPPPC/assignment-01/solution/vector-old.c	/^Vector * vector__assign(Vector * _this, Vector * other)$/;"	f	language:C++
+vector__assign	/home/rskletza/Documents/Uni/CPPPC/assignment-01/solution/vector.c	/^Vector * vector__assign(Vector * _this, Vector * other)$/;"	f	language:C++
+vector__assign	/home/rskletza/Documents/Uni/CPPPC/assignment-01/solution/vector.h	/^Vector *       vector__assign(Vector * lhs, Vector * rhs);$/;"	p	language:C++
+vector__at	/home/rskletza/Documents/Uni/CPPPC/assignment-01/solution/vector-old.c	/^VectorValue vector__at(Vector * _this, VectorValue offset)$/;"	f	language:C++
+vector__at	/home/rskletza/Documents/Uni/CPPPC/assignment-01/solution/vector.c	/^VectorValue vector__at(Vector * _this, VectorValue offset)$/;"	f	language:C++
+vector__at	/home/rskletza/Documents/Uni/CPPPC/assignment-01/solution/vector.h	/^VectorValue    vector__at(Vector * v, int offset);$/;"	p	language:C++
+vector__begin	/home/rskletza/Documents/Uni/CPPPC/assignment-01/solution/vector-old.c	/^VectorIterator vector__begin(Vector * _this)$/;"	f	language:C++
+vector__begin	/home/rskletza/Documents/Uni/CPPPC/assignment-01/solution/vector.c	/^VectorIterator vector__begin(Vector * _this)$/;"	f	language:C++
+vector__begin	/home/rskletza/Documents/Uni/CPPPC/assignment-01/solution/vector.h	/^VectorIterator vector__begin(Vector * v);$/;"	p	language:C++
+vector__copy	/home/rskletza/Documents/Uni/CPPPC/assignment-01/solution/vector-old.c	/^Vector * vector__copy(Vector * old)$/;"	f	language:C++
+vector__copy	/home/rskletza/Documents/Uni/CPPPC/assignment-01/solution/vector.c	/^Vector * vector__copy(Vector * old)$/;"	f	language:C++
+vector__copy	/home/rskletza/Documents/Uni/CPPPC/assignment-01/solution/vector.h	/^Vector *       vector__copy(Vector * other);$/;"	p	language:C++
+vector__delete	/home/rskletza/Documents/Uni/CPPPC/assignment-01/solution/vector-old.c	/^void vector__delete(Vector * _this)$/;"	f	language:C++
+vector__delete	/home/rskletza/Documents/Uni/CPPPC/assignment-01/solution/vector.c	/^void vector__delete(Vector * _this)$/;"	f	language:C++
+vector__delete	/home/rskletza/Documents/Uni/CPPPC/assignment-01/solution/vector.h	/^void           vector__delete(Vector * v);$/;"	p	language:C++
+vector__empty	/home/rskletza/Documents/Uni/CPPPC/assignment-01/solution/vector-old.c	/^int vector__empty(Vector * _this)$/;"	f	language:C++
+vector__empty	/home/rskletza/Documents/Uni/CPPPC/assignment-01/solution/vector.c	/^int vector__empty(Vector * _this)$/;"	f	language:C++
+vector__empty	/home/rskletza/Documents/Uni/CPPPC/assignment-01/solution/vector.h	/^int            vector__empty(Vector * v);$/;"	p	language:C++
+vector__end	/home/rskletza/Documents/Uni/CPPPC/assignment-01/solution/vector-old.c	/^VectorIterator vector__end(Vector * _this)$/;"	f	language:C++
+vector__end	/home/rskletza/Documents/Uni/CPPPC/assignment-01/solution/vector.c	/^VectorIterator vector__end(Vector * _this)$/;"	f	language:C++
+vector__end	/home/rskletza/Documents/Uni/CPPPC/assignment-01/solution/vector.h	/^VectorIterator vector__end(Vector * v);$/;"	p	language:C++
+vector__equals	/home/rskletza/Documents/Uni/CPPPC/assignment-01/solution/vector-old.c	/^int vector__equals(Vector * v1, Vector * v2)$/;"	f	language:C++
+vector__equals	/home/rskletza/Documents/Uni/CPPPC/assignment-01/solution/vector.c	/^int vector__equals(Vector * v1, Vector * v2)$/;"	f	language:C++
+vector__equals	/home/rskletza/Documents/Uni/CPPPC/assignment-01/solution/vector.h	/^int            vector__equals(Vector * lhs, Vector * rhs);$/;"	p	language:C++
+vector__init	/home/rskletza/Documents/Uni/CPPPC/assignment-01/solution/vector-old.c	/^void vector__init(Vector * _this, int count)$/;"	f	language:C++
+vector__init	/home/rskletza/Documents/Uni/CPPPC/assignment-01/solution/vector.c	/^void vector__init(Vector * _this, int count)$/;"	f	language:C++
+vector__init	/home/rskletza/Documents/Uni/CPPPC/assignment-01/solution/vector.h	/^void			vector__init(Vector *, int);$/;"	p	language:C++
+vector__new	/home/rskletza/Documents/Uni/CPPPC/assignment-01/solution/vector-old.c	/^Vector * vector__new()$/;"	f	language:C++
+vector__new	/home/rskletza/Documents/Uni/CPPPC/assignment-01/solution/vector.c	/^Vector * vector__new()$/;"	f	language:C++
+vector__new	/home/rskletza/Documents/Uni/CPPPC/assignment-01/solution/vector.h	/^Vector *       vector__new();$/;"	p	language:C++
+vector__pop_back	/home/rskletza/Documents/Uni/CPPPC/assignment-01/solution/vector-old.c	/^VectorValue vector__pop_back(Vector * _this)$/;"	f	language:C++
+vector__pop_back	/home/rskletza/Documents/Uni/CPPPC/assignment-01/solution/vector.c	/^VectorValue vector__pop_back(Vector * _this)$/;"	f	language:C++
+vector__pop_back	/home/rskletza/Documents/Uni/CPPPC/assignment-01/solution/vector.h	/^VectorValue    vector__pop_back(Vector * v);$/;"	p	language:C++
+vector__pop_front	/home/rskletza/Documents/Uni/CPPPC/assignment-01/solution/vector-old.c	/^VectorValue vector__pop_front(Vector * _this)$/;"	f	language:C++
+vector__pop_front	/home/rskletza/Documents/Uni/CPPPC/assignment-01/solution/vector.c	/^VectorValue vector__pop_front(Vector * _this)$/;"	f	language:C++
+vector__pop_front	/home/rskletza/Documents/Uni/CPPPC/assignment-01/solution/vector.h	/^VectorValue    vector__pop_front(Vector * v);$/;"	p	language:C++
+vector__print	/home/rskletza/Documents/Uni/CPPPC/assignment-01/solution/vector-old.c	/^void vector__print(Vector * _this)$/;"	f	language:C++
+vector__print	/home/rskletza/Documents/Uni/CPPPC/assignment-01/solution/vector.c	/^void vector__print(Vector * _this)$/;"	f	language:C++
+vector__print	/home/rskletza/Documents/Uni/CPPPC/assignment-01/solution/vector.h	/^void			vector__print(Vector *);$/;"	p	language:C++
+vector__push_back	/home/rskletza/Documents/Uni/CPPPC/assignment-01/solution/vector-old.c	/^void vector__push_back(Vector * _this, VectorValue val)$/;"	f	language:C++
+vector__push_back	/home/rskletza/Documents/Uni/CPPPC/assignment-01/solution/vector.c	/^void vector__push_back(Vector * _this, VectorValue val)$/;"	f	language:C++
+vector__push_back	/home/rskletza/Documents/Uni/CPPPC/assignment-01/solution/vector.h	/^void           vector__push_back(Vector * v, VectorValue value);$/;"	p	language:C++
+vector__push_front	/home/rskletza/Documents/Uni/CPPPC/assignment-01/solution/vector-old.c	/^void vector__push_front(Vector * _this, VectorValue val)$/;"	f	language:C++
+vector__push_front	/home/rskletza/Documents/Uni/CPPPC/assignment-01/solution/vector.c	/^void vector__push_front(Vector * _this, VectorValue val)$/;"	f	language:C++
+vector__push_front	/home/rskletza/Documents/Uni/CPPPC/assignment-01/solution/vector.h	/^void           vector__push_front(Vector * v, VectorValue value);$/;"	p	language:C++
+vector__reverse	/home/rskletza/Documents/Uni/CPPPC/assignment-01/solution/vector-old.c	/^Vector * vector__reverse(Vector * v)$/;"	f	language:C++
+vector__reverse	/home/rskletza/Documents/Uni/CPPPC/assignment-01/solution/vector.c	/^Vector * vector__reverse(Vector * v)$/;"	f	language:C++
+vector__reverse	/home/rskletza/Documents/Uni/CPPPC/assignment-01/solution/vector.h	/^Vector *       vector__reverse(Vector *);$/;"	p	language:C++
+vector__size	/home/rskletza/Documents/Uni/CPPPC/assignment-01/solution/vector-old.c	/^int vector__size(Vector * _this)$/;"	f	language:C++
+vector__size	/home/rskletza/Documents/Uni/CPPPC/assignment-01/solution/vector.c	/^int vector__size(Vector * _this)$/;"	f	language:C++
+vector__size	/home/rskletza/Documents/Uni/CPPPC/assignment-01/solution/vector.h	/^int            vector__size(Vector * v);$/;"	p	language:C++
+_count	/home/rskletza/Documents/Uni/CPPPC/assignment-01/solution/deque.h	/^  int          _count;$/;"	m	language:C++	struct:__anon1
+_count	/home/rskletza/Documents/Uni/CPPPC/assignment-01/solution/stack.h	/^  int          _count;$/;"	m	language:C++	struct:__anon1
+_count	/home/rskletza/Documents/Uni/CPPPC/assignment-01/solution/vector.h	/^  int           _count;$/;"	m	language:C++	struct:__anon1
+_max	/home/rskletza/Documents/Uni/CPPPC/assignment-01/solution/vector.h	/^  int			_max;$/;"	m	language:C++	struct:__anon1
+_values	/home/rskletza/Documents/Uni/CPPPC/assignment-01/solution/deque.h	/^  DequeValue * _values;$/;"	m	language:C++	struct:__anon1
+_values	/home/rskletza/Documents/Uni/CPPPC/assignment-01/solution/stack.h	/^  StackValue * _values;$/;"	m	language:C++	struct:__anon1
+_values	/home/rskletza/Documents/Uni/CPPPC/assignment-01/solution/vector.h	/^  VectorValue * _values;$/;"	m	language:C++	struct:__anon1

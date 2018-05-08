@@ -1,0 +1,29 @@
+!_TAG_FILE_SORTED	2	/0=unsorted, 1=sorted, 2=foldcase/
+coeff	/home/rskletza/Documents/Uni/CPPPC/assignment-02/solution/heap/heap.h	/^  double coeff;$/;"	m	language:C++	struct:cpppc::HeapElement_t
+cpppc	/home/rskletza/Documents/Uni/CPPPC/assignment-02/solution/heap/heap.cc	/^namespace cpppc {$/;"	n	language:C++	file:
+cpppc	/home/rskletza/Documents/Uni/CPPPC/assignment-02/solution/heap/heap.h	/^namespace cpppc {$/;"	n	language:C++
+CPPPC__SESSION_02__PRIMITIVE_H__INCLUDED	/home/rskletza/Documents/Uni/CPPPC/assignment-02/solution/heap/heap.h	2;"	d	language:C++
+elements	/home/rskletza/Documents/Uni/CPPPC/assignment-02/solution/heap/heap.h	/^  inline const HeapElement * elements() const$/;"	f	language:C++	class:cpppc::Heap
+elements	/home/rskletza/Documents/Uni/CPPPC/assignment-02/solution/heap/heap.h	/^  inline HeapElement * elements()$/;"	f	language:C++	class:cpppc::Heap
+Heap	/home/rskletza/Documents/Uni/CPPPC/assignment-02/solution/heap/heap.cc	/^Heap::Heap($/;"	f	language:C++	class:cpppc::Heap
+Heap	/home/rskletza/Documents/Uni/CPPPC/assignment-02/solution/heap/heap.cc	/^Heap::Heap(const Heap & other)$/;"	f	language:C++	class:cpppc::Heap
+Heap	/home/rskletza/Documents/Uni/CPPPC/assignment-02/solution/heap/heap.h	/^  Heap($/;"	p	language:C++	class:cpppc::Heap
+Heap	/home/rskletza/Documents/Uni/CPPPC/assignment-02/solution/heap/heap.h	/^  Heap(const Heap & other);$/;"	p	language:C++	class:cpppc::Heap
+Heap	/home/rskletza/Documents/Uni/CPPPC/assignment-02/solution/heap/heap.h	/^class Heap$/;"	c	language:C++	namespace:cpppc
+HeapElement	/home/rskletza/Documents/Uni/CPPPC/assignment-02/solution/heap/heap.h	/^} HeapElement;$/;"	t	language:C++	namespace:cpppc	typeref:struct:cpppc::HeapElement_t
+HeapElement_t	/home/rskletza/Documents/Uni/CPPPC/assignment-02/solution/heap/heap.h	/^typedef struct HeapElement_t {$/;"	s	language:C++	namespace:cpppc
+name	/home/rskletza/Documents/Uni/CPPPC/assignment-02/solution/heap/heap.h	/^  inline const std::string & name() const$/;"	f	language:C++	class:cpppc::Heap
+operator <<	/home/rskletza/Documents/Uni/CPPPC/assignment-02/solution/heap/heap.cc	/^std::ostream & operator<<($/;"	f	language:C++	namespace:cpppc
+operator <<	/home/rskletza/Documents/Uni/CPPPC/assignment-02/solution/heap/heap.cc	/^std::ostream & operator<<($/;"	f	language:C++	namespace:cpppc
+operator <<	/home/rskletza/Documents/Uni/CPPPC/assignment-02/solution/heap/heap.h	/^std::ostream & operator<<($/;"	p	language:C++	namespace:cpppc
+operator <<	/home/rskletza/Documents/Uni/CPPPC/assignment-02/solution/heap/heap.h	/^std::ostream & operator<<($/;"	p	language:C++	namespace:cpppc
+operator =	/home/rskletza/Documents/Uni/CPPPC/assignment-02/solution/heap/heap.cc	/^Heap & Heap::operator=(const Heap & other)$/;"	f	language:C++	class:cpppc::Heap
+operator =	/home/rskletza/Documents/Uni/CPPPC/assignment-02/solution/heap/heap.h	/^  Heap & operator=(const Heap & other);$/;"	p	language:C++	class:cpppc::Heap
+operator []	/home/rskletza/Documents/Uni/CPPPC/assignment-02/solution/heap/heap.h	/^  inline const HeapElement & operator[](int index) const$/;"	f	language:C++	class:cpppc::Heap
+operator []	/home/rskletza/Documents/Uni/CPPPC/assignment-02/solution/heap/heap.h	/^  inline HeapElement & operator[](int index)$/;"	f	language:C++	class:cpppc::Heap
+size	/home/rskletza/Documents/Uni/CPPPC/assignment-02/solution/heap/heap.h	/^  inline size_t size() const$/;"	f	language:C++	class:cpppc::Heap
+_elements	/home/rskletza/Documents/Uni/CPPPC/assignment-02/solution/heap/heap.h	/^  HeapElement  * _elements = nullptr;$/;"	m	language:C++	class:cpppc::Heap
+_name	/home/rskletza/Documents/Uni/CPPPC/assignment-02/solution/heap/heap.h	/^  std::string    _name;$/;"	m	language:C++	class:cpppc::Heap
+_size	/home/rskletza/Documents/Uni/CPPPC/assignment-02/solution/heap/heap.h	/^  size_t         _size;$/;"	m	language:C++	class:cpppc::Heap
+~Heap	/home/rskletza/Documents/Uni/CPPPC/assignment-02/solution/heap/heap.cc	/^Heap::~Heap()$/;"	f	language:C++	class:cpppc::Heap
+~Heap	/home/rskletza/Documents/Uni/CPPPC/assignment-02/solution/heap/heap.h	/^  ~Heap();$/;"	p	language:C++	class:cpppc::Heap

@@ -1,0 +1,9 @@
+Why malloc/free should be exorcised from C++ code
+
+"If you can write C code, you can write C++ code!" Well, technically that is correct. C code (with a few simple adjustments) can be compiled by a C++ compiler. However, it is not C++ code. Why? Let us examine a simple (but exemplary) fallacy: using malloc/free in C++.
+
+In general, the problem with dynamic memory allocation in C is that whenever the allocated memory is not released when it is no longer needed, memory leaks are caused. This happens whenever the programmer does not explicitly free the memory*. Which happens a lot more often than any of us want to admit. 
+
+C++ on the other hand offers a possibility to implement RAII (Resource Allocation on Initialization) by using constructors and destructors. Any time an object goes out of scope, its destructor is called. And its destructor releases all resources allocated in the constructor. To use malloc and free in C++ is like using a damp towel to get a hot pan out of the oven even though there are two beautiful oven gloves lying right next to you: You will get burnt and IT'S TOTALLY YOUR OWN FAULT!
+
+*for a good example, see en.cppreference.com/w/cpp/language/raii

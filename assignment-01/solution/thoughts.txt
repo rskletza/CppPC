@@ -1,0 +1,57 @@
+1-1:
+What if we implemented a list?
+If we implemented a list, I would say we could no longer use pointers as iterators. The difference between a list and a vector is that a list element contains a pointer to the next and the former element. A list does not need to be a contiguous slot in memory because the position of its elements is only determined by the pointers in their neighboring elements. 
+--> The iterator has to be a list element. Moving the iterator is more complex than in vectors (where the address in memory can just be incremented), as it is necessary to look up the next memory location in the current element.
+
+Vector concept in the STL:
+- push/pop_front do not exist because insert/erase are a generalization of them
+- copy can be implemented by assign
+- equals?
+--> not all methods are present because they are redundant
+
+1-4
+Yes, there is an implementation for both stack and deque in the STL
+stack:
+- a stack is a container adaptor --> uses an underlying container of the type vector, deque or list
+- since a stack is a specialization of vector, deque or list (LIFO), there is no need to implement it as well
+
+deque:
+- is not implemented in the same way as a vector --> not necessarily contiguous memory!
+
+--> differences: both have similar (albeit less flexible) functionality to a vector, however a deque in the STL has a different internal structure from a vector in order to offer different advantages. A stack can use the internal structure of either, merely offering less options for inserting and extracting elements.
+
+1-5
+reverse algorithm:
+in-place reverse is not possible --> <T>__new() then a custom copy that reverses elements
+could also use push_front for deque and vector but that would require a reallocate for each element --> more expensive than allocating the correct size in the beginning
+
+How the stack is reversed depends on its internal representation.
+
+1-6
+Since the functions used in the tests are virtually the same, it would come in handy if there was such a thing as a template test for a group of data structures. In this case you would not have to implement a separate test for each container.
+
+The Liskov substitution principle comes to mind
+
+1-7 (definitions from Wolfram Alpha (WA) and Wikipedia (W))
+Sequence
+(possibly infinite) ordered list of numbers (WA)
+--> what is a list (a set where multiplicity is not ignored?)
+
+--> ordered and multiplicity allowed
+
+Interval
+a set containing all points (or all real numbers) between two given endpoints (WA)
+-->set?
+finite or infinite collection of objects in which order has no significance and multiplicity is generally also ignored (WA)
+
+--> contiguous, no multiplicity, finite
+
+Range
+range of a function is the set of all outputs of the function (W)
+
+--> subset of the codomain of the function, no multiplicity
+
+Region
+subset of |R^n or |C^n that is open, connected, and non-empty
+--> umm
+
