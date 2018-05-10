@@ -18,6 +18,7 @@ namespace cpppc {
   public:
     struct list_node {
        list_node * next;
+       list_node * prev;
        ValueT      value;
     };
     // list<T>::iterator
@@ -48,6 +49,17 @@ namespace cpppc {
           return old;
        }
 
+       iterator & operator--() {
+          _list_node = _list_node->prev;
+          return *this;
+       }
+
+       iterator operator--(int) {
+          iterator old = *this;
+          _list_node = _list_node->prev;
+          return old;
+       }
+
        const ValueT & operator*() const {
          return _list_node->value;
        }
@@ -74,9 +86,8 @@ namespace cpppc {
     
   public:
     list()
-	//here we define _begin and _end as iterators of this list object
     : _begin(iterator((*this)._head))
-    , _end(iterator((*this)._tail))
+    , _end(iterator((*this)._head))
     { }
 
     // list<uint32_t>(list<int32_t>()) says 'nouh'
@@ -143,10 +154,10 @@ namespace cpppc {
 
     const ValueT & front()
     {
-	return _head._value;
+	return _head.value;
     }
 
-    const list_node & back()
+    const ValueT & back()
     {
 	return _tail.value;
     }
@@ -155,41 +166,48 @@ namespace cpppc {
     void push_back(const ValueT value)
     {
 	list_node new_node;
-       	new_node.next = &_tail;
+       	new_node.next = nullptr;//&_tail; //TODO last element
+	new_node.prev = &_tail;
 	new_node.value = value;
-	iterator i = begin();
-	while (i != back())
-	{
-	    ++i;
-	}
-	_ = &new_node;
+	_tail = new_node;
+	++end();
 	++_size;
     }
 
     ValueT pop_back()
     {
-//	if (size() == 0)
-//	    return default_value;
-//
-//	iterator i = begin();
-//	while (i != back())
-//	{
-//		++i;
-//	}
-//	ValueT val = *i;
-//	delete _tail;
-//	_tail = new_tail;
-//	return val;
+	if (size() == 0)
+	    return default_value;
+
+	ValueT val = back();
+	std::cout << "marker \n";
+	_tail = *(_tail.prev);
+	std::cout << "marker 2\n";
+	--end();
+	--_size;
+	return val;
     }
 
     void push_front(const ValueT value)
     {
-
+	list_node new_node;
+       	new_node.next = &_head;
+	new_node.value = value;
+	_head = new_node;	
+	_begin = iterator(_head);
+	++_size;
     }
 
     ValueT pop_front()
     {
+	if (size() == 0)
+	    return default_value;
 
+	ValueT val = front();
+	_head = *(_head.next);
+	_begin = iterator(_head);
+	--_size;
+	return val;
     }
 
 //    iterator insert(iterator pos, const ValueT value);
