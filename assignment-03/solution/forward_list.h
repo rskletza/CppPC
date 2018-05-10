@@ -27,22 +27,21 @@ namespace cpppc {
        typedef typename forward_list_t::iterator self_t;
 
     public:
+       using iterator_category = std::forward_iterator_tag;
+       using value_type = ValueT;
+       using difference_type = std::ptrdiff_t;
+       using pointer = value_type *;
+       using reference = value_type &;
+
        iterator() = delete;
 
        iterator(forward_list_node & _node)
        : _forward_list_node(&_node)
        { }
 
-       // const my_container & c;
-       // c[23] = "foo";
-       // c.push_back("foo"); <-- 'nouh'
 
-       //TODO WARUM INKREMENTIERT DER POINTER NICHT?!?!!?!
        iterator & operator++() {
-//	  std::cout << "old address: " << &_forward_list_node << "\n";
-//	  std::cout << "next address: " << _forward_list_node->next << "\n";
           _forward_list_node = _forward_list_node->next;
-//	  std::cout << "new address: " << &_forward_list_node << "\n";
           return *this;
        }
 
@@ -82,12 +81,12 @@ namespace cpppc {
     , _end(iterator((*this)._tail))
     { }
 
-    // forward_list<uint32_t>(forward_list<int32_t>()) says 'nouh'
-    forward_list(const self_t & other)             = default;
+    forward_list(const self_t & other) = default;
     self_t & operator=(const self_t & rhs) = default;
 
     bool operator==(const self_t & other) const
     {
+	//TODO compare begin and end
 	if (this == &other) //identity
 	    return true;
 
@@ -111,15 +110,11 @@ namespace cpppc {
 	return true; 
     }
 
-    // forward_list<int> l;
-    // l_begin = l.begin();
-    // ++l_begin;
     iterator begin() const 
     { 
 	return _begin; 
     }
-    // forward_list<T> l;
-    // *l.end();
+
     iterator end() const 
     { 
 	return _end; 
@@ -149,24 +144,9 @@ namespace cpppc {
 
     void push_front(const ValueT value)
     {
-	std::cout << "first value " << *_begin << "\n";
-	forward_list_node new_node;
-	std::cout << "head:\t" <<  &(_head) << "\n";
-	std::cout << "tail:\t" << &(_tail) << "\n";
-	std::cout << "new node address: " << &new_node << "\n";
-
-       	new_node.next = &_head;
-	std::cout << "new node next address (should be same as head): " << new_node.next << "\n";
-	std::cout << "new node next value: " << (new_node.next)->value << "\n";
-	new_node.value = value;
-	_head = new_node;	
-	std::cout << "head address (should be same as new node addr): " << &_head << "\n";
-	std::cout << "head value: " << _head.value << "\n";
-	std::cout << "second value " << (_head.next)->value << "\n";
-	
-	_begin = iterator(_head);
+	_head = new forward_list_node{_head, value};
+	_begin = iterator(*_head);
 	++_size;
-	print_list();
     }
 
     ValueT pop_front()
@@ -174,11 +154,13 @@ namespace cpppc {
 	if (size() == 0)
 	    return default_value;
 
-	ValueT val = _head.value;
-	_head = *(_head.next);
-	_begin = iterator(_head);
+	forward_list_node * tmp = _head;
+	ValueT val = tmp->value;
+	_head = _head->next;
+	delete tmp;
+
+	_begin = iterator(*_head);
 	--_size;
-	print_list();
 	return val;
     }
 
@@ -197,19 +179,14 @@ namespace cpppc {
 	    std::cout << "\n";
     }
 	
-    
-
-//    iterator insert(iterator pos, const ValueT value);
-    
   private:
     // same as = { }
     forward_list_node _tail = { nullptr, default_value };
-    forward_list_node _head = _tail;
+    forward_list_node * _head = &_tail;
     size_t _size = 0;
 
-    // self_t * this
 
-    iterator  _begin; // = *this;
+    iterator  _begin;
     iterator  _end;
   };
 
