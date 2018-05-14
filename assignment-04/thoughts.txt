@@ -1,0 +1,6 @@
+105 STL algorithms in less than one hour - Boccara
+- a range is something that can be iterated over --> every STL container is a range
+- set in c++ is a sorted collection
+- for_each is for side-effects --> functions that return void
+
+- nth_element sort --> for median
