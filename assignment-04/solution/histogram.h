@@ -18,43 +18,23 @@ inline Iter histogram(Iter first, Iter last) {
     if (first == last)
 	return first;
 
-    std::cout << "(";
-    std::for_each(first, last, [](value_t &n){
-	    std::cout <<" "<< n;
-	    });
-    std::cout << ")\n";
-
     std::unordered_map<value_t, size_t> aux;
-//    std::for_each(first, last, [&aux](value_t &n){
-//	if(aux.find(n) == aux.end())
-//	    aux.insert({n, std::count(first, last, n)});
-//	else
-//	    
-//	    })
-    std::remove_if(first, last, [&aux, first, last](value_t &n){
+
+    //remove all elements that appear several times and save their count to the map
+    //save the pointer to the last new element in order to return it later
+    auto ret = std::remove_if(first, last, [&aux, first, last](value_t &n){
 	if(aux.find(n) == aux.end())
 	{
 	    aux.insert({n, std::count(first, last, n)});
-	    std::cout << "new element " << n <<"\n";
 	    return false;
 	}
-	std::cout << "remove element " << n << "\n";
 	return true; 
     });
 
-    for(const auto& n : aux)
-    {
-	std::cout << n.first << ":" << n.second << ", ";
-    }
-    std::cout << "\n";
+    //replace the elements by their count in the original container
+    std::for_each(first, ret, [&aux](value_t &n){ n = aux[n]; });
 
-    std::cout << "(";
-    std::for_each(first, last, [](value_t &n){
-	    std::cout <<" "<< n;
-	    });
-    std::cout << ")\n";
-
-    return first;
+    return ret;
 }
 
 #endif // CPPPC__S03__HISTOGRAM_H__INCLUDED
