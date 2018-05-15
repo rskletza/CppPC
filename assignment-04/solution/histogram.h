@@ -15,20 +15,46 @@ inline Iter histogram(Iter first, Iter last) {
 
     // YOUR IMPLEMENTATION HERE
     //
-    if (first = last)
+    if (first == last)
 	return first;
 
-    set<value_t> aux;
-    std::copy(first, last, aux.first, aux.last);
-    
-//    bool isfirst = true;
-//    int occurs = 0;
-//    std::for_each(first, last, [&isfirst, &occurs](value_t &n){
-//	++occurs;
-//	if (isfirst)
-//	    isfirst = false;
+    std::cout << "(";
+    std::for_each(first, last, [](value_t &n){
+	    std::cout <<" "<< n;
+	    });
+    std::cout << ")\n";
+
+    std::unordered_map<value_t, size_t> aux;
+//    std::for_each(first, last, [&aux](value_t &n){
+//	if(aux.find(n) == aux.end())
+//	    aux.insert({n, std::count(first, last, n)});
 //	else
-//	    }
+//	    
+//	    })
+    std::remove_if(first, last, [&aux, first, last](value_t &n){
+	if(aux.find(n) == aux.end())
+	{
+	    aux.insert({n, std::count(first, last, n)});
+	    std::cout << "new element " << n <<"\n";
+	    return false;
+	}
+	std::cout << "remove element " << n << "\n";
+	return true; 
+    });
+
+    for(const auto& n : aux)
+    {
+	std::cout << n.first << ":" << n.second << ", ";
+    }
+    std::cout << "\n";
+
+    std::cout << "(";
+    std::for_each(first, last, [](value_t &n){
+	    std::cout <<" "<< n;
+	    });
+    std::cout << ")\n";
+
+    return first;
 }
 
 #endif // CPPPC__S03__HISTOGRAM_H__INCLUDED
