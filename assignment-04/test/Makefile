@@ -1,5 +1,5 @@
 
-CC=clang++
+CC=g++ #clang++
 CFLAGS=--std=c++11 -Wall -Wextra -pedantic -g
 LDFLAGS=-lpthread -L${GTEST_BASE}/lib -lgtest
 
@@ -7,7 +7,8 @@ INCLUDES=-I${GTEST_BASE}/include -I../
 
 OBJS = testsuite.o \
 			 find_mean_rep_test.o \
-			 histogram_test.o
+			 histogram_test.o \
+			 sparse_array_test.o
 
 .DEFAULT: all
 all: $(OBJS) testsuite.bin
