@@ -87,7 +87,7 @@ class sparse_array_iterator
         self_t & operator++()
         {
             ++_index;
-//            std::cout<< "++: new index: " << _index << "\n";
+            std::cout<< "++: new index: " << _index << ", value here: " << *(*this) << "\n";
             return *this;
         }
 
@@ -229,6 +229,7 @@ class sparse_array_proxy_ref
 
     operator const value_t & () const
     {
+//        std::cout << "read at " << _index << "\n";
         auto it = _array._map.find(_index);
         if (it  == _array._map.end())
             return (_array._default); 
@@ -412,6 +413,7 @@ class sparse_array
     void printmap()
     {
         std::cout << "printing map \n";
+        std::cout << "begin index: " << _begin.getindex() << ", end index: " << _end.getindex() << "\n";
         for (const auto & n : _map)
         {
             std::cout << "index:" << n.first << ", value:" << n.second << "\n";
@@ -433,8 +435,8 @@ class sparse_array
     T                                     _default = {};
 
     iterator                              _begin  = iterator(*this, 0);
-    iterator                              _end    = iterator(*this, _size);
-    iterator                              _rbegin  = iterator(*this, _size-1);
+    iterator                              _end; //   = iterator(*this, _size);
+    iterator                              _rbegin; //  = iterator(*this, _size-1);
     iterator                              _rend    = iterator(*this, -1);
     
 //    forward_list_node _tail = { nullptr, default_value };
