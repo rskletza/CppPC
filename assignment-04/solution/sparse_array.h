@@ -14,6 +14,9 @@ namespace detail {
 template <class T, std::size_t N>
 class sparse_array;
 
+template <class SparseArrayT>
+class sparse_array_proxy_ref;
+
 //template <typename T>
 template <class SparseArrayT>
 class sparse_array_iterator
@@ -23,7 +26,7 @@ class sparse_array_iterator
         typedef sparse_array_iterator<SparseArrayT> self_t;
         typedef typename SparseArrayT::value_t value_t;
         typedef std::size_t index_t;
-        //typedef detail::sparse_array_proxy_ref<self_t>  proxy_reference;
+        typedef sparse_array_proxy_ref<SparseArrayT>  proxy_reference;
 
     public:
         using iterator_category = std::random_access_iterator_tag;
@@ -61,15 +64,20 @@ class sparse_array_iterator
                 return it->second;
         }
 
-        reference operator*(const value_t val)
+        proxy_reference operator*()
         {
-            std::cout << val <<  " inserted at " << _index << "\n";
-            auto it = _array._map.find(_index);
-            if (it  == _array._map.end())
-                _array._map.insert({_index, val});
-            else
-                it->second = val;
+            return proxy_reference(_array, _index);
+//            auto it = _array._map.find(_index);
+//            if (it  == _array._map.end())
+//                return (_array._default); 
+//            else
+//                return it->second;
         }
+
+//        proxy_reference operator*(const value_t val)
+//        {
+//            return proxy_reference(_array, _index);
+//        }
 
         reference operator[](int offset) const
         {
@@ -79,7 +87,7 @@ class sparse_array_iterator
         self_t & operator++()
         {
             ++_index;
-            std::cout<< "++: new index: " << _index << "\n";
+//            std::cout<< "++: new index: " << _index << "\n";
             return *this;
         }
 
@@ -171,6 +179,11 @@ class sparse_array_iterator
             return !((*this)<other);
         }
 
+        index_t getindex()
+        {
+            return _index;
+        }
+
     private:
         SparseArrayT & _array;
         index_t _index;
@@ -180,7 +193,7 @@ template <class SparseArrayT>
 class sparse_array_proxy_ref
 {
     typedef sparse_array_proxy_ref<SparseArrayT>    self_t;
-    typedef typename SparseArrayT::value_t value_t;
+    typedef typename SparseArrayT::value_t          value_t;
 
   public:
     sparse_array_proxy_ref(SparseArrayT & array, size_t index)
@@ -188,14 +201,30 @@ class sparse_array_proxy_ref
         , _index(index)
     {}
 
+    sparse_array_proxy_ref(const self_t & other)
+        : _array(other._array)
+        , _index(other._index)
+    {}
+
     void operator=(const value_t & val)
     {
-        std::cout << val <<  " inserted at " << _index << "\n";
+//        std::cout << val <<  " inserted at " << _index << "\n";
         auto it = _array._map.find(_index);
         if (it  == _array._map.end())
             _array._map.insert({_index, val});
         else
             it->second = val;
+    }
+
+    self_t & operator=(const self_t & other)
+    {
+        if (&other != this)
+        {
+            _array = other._array;
+            _index = other._index;
+        }
+
+        return *this;
     }
 
     operator const value_t & () const
@@ -325,6 +354,16 @@ class sparse_array
         return *_rbegin;
     }
 
+    proxy_reference front() 
+    {
+        return proxy_reference((*this), _begin.getindex()); 
+    }
+
+    proxy_reference back() 
+    {
+        return proxy_reference((*this),_rbegin.getindex());
+    }
+
     iterator begin() const
     {
         return _begin;
@@ -367,7 +406,7 @@ class sparse_array
 
     void swap(self_t & other)
     {
-        std::swap_ranges(begin(), end(), other.begin(), other.end());
+        std::swap_ranges(_map.begin(), _map.end(), other._map.begin(), other._map.end());
     }
 
     void printmap()
@@ -378,6 +417,15 @@ class sparse_array
             std::cout << "index:" << n.first << ", value:" << n.second << "\n";
         }
     }
+
+        void printarray()
+        {
+            for (auto i = begin(); i!=end(); ++i)
+            {
+                std::cout << i.getindex() << ":" << *i << " of " << _size <<  "\n";
+            }
+        }
+
 
   private:
     size_t                                _size;
