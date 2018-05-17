@@ -178,7 +178,29 @@ class sparse_array_iterator
 template <class SparseArrayT>
 class sparse_array_proxy_ref
 {
-  // Just a suggestion
+    typedef sparse_array_proxy_ref<SparseArrayT>    self_t;
+    typedef typename SparseArrayT::value_t value_t;
+
+  public:
+    sparse_array_proxy_ref(const SparseArrayT & array, const size_t index)
+        : _array(array)
+        , _index(index)
+    {}
+
+    void operator=(const value_t & val)
+    {
+//        _array->_map.insert_or_assign(_index, val);
+
+        auto it = _array._map.find(_index);
+        if (it  == _array._map.end())
+            _array._map.insert({_index, val});
+        else
+            it->second = val;
+    }
+
+  private:
+    SparseArrayT & _array;
+    size_t _index;
 };
 
 } // namespace detail
@@ -200,6 +222,7 @@ class sparse_array
     typedef index_t                                 difference_type;
 
     friend iterator;
+    friend proxy_reference;
 
   public:
 
@@ -222,16 +245,7 @@ class sparse_array
        
        _end = iterator(*this, _size);
        _rbegin = iterator(*this, _size-1);
-    }
-
-    void fill(const T& value)
-    {
-        std::fill(begin(), end(), value);
-    }
-
-    void swap(self_t & other)
-    {
-        std::swap_ranges(begin(), end(), other.begin(), other.end());
+       return (*this);
     }
 
     bool operator==(const self_t & rhs) const
@@ -273,13 +287,12 @@ class sparse_array
         return !((*this)<rhs);
     }
 
-
-    T & operator[](index_t index)
+    proxy_reference & operator[](index_t index)
     {
         if (index >= _size || index < 0)
             throw std::out_of_range("out of range");
 
-        return _begin[index];
+        return proxy_reference(*this, index);
     }
 
     const T & operator[](index_t index) const
@@ -333,6 +346,16 @@ class sparse_array
     std::size_t max_size() const
     {
         return _size;
+    }
+
+    void fill(const T& value)
+    {
+        std::fill(begin(), end(), value);
+    }
+
+    void swap(self_t & other)
+    {
+        std::swap_ranges(begin(), end(), other.begin(), other.end());
     }
 
   private:
