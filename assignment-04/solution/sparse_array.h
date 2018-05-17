@@ -23,6 +23,7 @@ class sparse_array_iterator
         typedef sparse_array_iterator<SparseArrayT> self_t;
         typedef typename SparseArrayT::value_t value_t;
         typedef std::size_t index_t;
+        //typedef detail::sparse_array_proxy_ref<self_t>  proxy_reference;
 
     public:
         using iterator_category = std::random_access_iterator_tag;
@@ -60,15 +61,15 @@ class sparse_array_iterator
                 return it->second;
         }
 
-//        reference operator*(const value_t val)
-//        {
-//            auto it = _array._map.find(_index);
-//            if (it  == _array._map.end())
-//                _array.insert_or_assign(_index, val);
-//                return (_array._default); 
-//            else
-//                return it->second;
-//        }
+        reference operator*(const value_t val)
+        {
+            std::cout << val <<  " inserted at " << _index << "\n";
+            auto it = _array._map.find(_index);
+            if (it  == _array._map.end())
+                _array._map.insert({_index, val});
+            else
+                it->second = val;
+        }
 
         reference operator[](int offset) const
         {
@@ -182,20 +183,28 @@ class sparse_array_proxy_ref
     typedef typename SparseArrayT::value_t value_t;
 
   public:
-    sparse_array_proxy_ref(const SparseArrayT & array, const size_t index)
+    sparse_array_proxy_ref(SparseArrayT & array, size_t index)
         : _array(array)
         , _index(index)
     {}
 
     void operator=(const value_t & val)
     {
-//        _array->_map.insert_or_assign(_index, val);
-
+        std::cout << val <<  " inserted at " << _index << "\n";
         auto it = _array._map.find(_index);
         if (it  == _array._map.end())
             _array._map.insert({_index, val});
         else
             it->second = val;
+    }
+
+    operator const value_t & () const
+    {
+        auto it = _array._map.find(_index);
+        if (it  == _array._map.end())
+            return (_array._default); 
+        else
+            return it->second;
     }
 
   private:
@@ -209,8 +218,6 @@ class sparse_array_proxy_ref
 template <class T, std::size_t N>
 class sparse_array
 {
-      // Just a suggestion:
-    
     typedef sparse_array<T, N>                      self_t;
     typedef T   value_t;
     typedef detail::sparse_array_proxy_ref<self_t>  proxy_reference;
@@ -229,6 +236,7 @@ class sparse_array
     sparse_array()//T def_val)
     : _size(N)
     , _end((*this), N)
+    , _rbegin((*this), N-1)
 //    , _begin(iterator((*this)._end))
 //    , _end(iterator((*this)._end))
 //    , _default(def_val)
@@ -240,12 +248,31 @@ class sparse_array
 
     self_t & operator=(const self_t & other)
     {
-       _map = other._map;
-       _size = other.size(); 
-       
-       _end = iterator(*this, _size);
-       _rbegin = iterator(*this, _size-1);
+        if((this) != &other)
+        {
+           _map = other._map;
+           _size = other.size(); 
+           
+           _end = iterator(*this, _size);
+           _rbegin = iterator(*this, _size-1);
+        }
        return (*this);
+    }
+
+    proxy_reference operator[](index_t index)
+    {
+        if (index >= _size || index < 0)
+            throw std::out_of_range("out of range");
+
+        return proxy_reference(*this, index);
+    }
+
+    const T & operator[](index_t index) const
+    {
+        if (index >= _size || index < 0)
+            throw std::out_of_range("out of range");
+
+        return _begin[index];
     }
 
     bool operator==(const self_t & rhs) const
@@ -287,21 +314,6 @@ class sparse_array
         return !((*this)<rhs);
     }
 
-    proxy_reference & operator[](index_t index)
-    {
-        if (index >= _size || index < 0)
-            throw std::out_of_range("out of range");
-
-        return proxy_reference(*this, index);
-    }
-
-    const T & operator[](index_t index) const
-    {
-        if (index >= _size || index < 0)
-            throw std::out_of_range("out of range");
-
-        return _begin[index];
-    }
 
     T & front() const
     {
@@ -356,6 +368,15 @@ class sparse_array
     void swap(self_t & other)
     {
         std::swap_ranges(begin(), end(), other.begin(), other.end());
+    }
+
+    void printmap()
+    {
+        std::cout << "printing map \n";
+        for (const auto & n : _map)
+        {
+            std::cout << "index:" << n.first << ", value:" << n.second << "\n";
+        }
     }
 
   private:
