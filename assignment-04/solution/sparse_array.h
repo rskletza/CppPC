@@ -16,7 +16,12 @@ class sparse_array;
 template <class SparseArrayT>
 class sparse_array_proxy_ref;
 
-//template <typename T>
+template<typename T>
+void swap(sparse_array_proxy_ref<T> p1, sparse_array_proxy_ref<T> p2)
+{
+    p1.swap(p2);
+}
+
 template <class SparseArrayT>
 class sparse_array_iterator
 {
@@ -36,7 +41,7 @@ class sparse_array_iterator
 
     public:
         sparse_array_iterator() = default; //alle iteratoren haben einen default konstruktor
-        sparse_array_iterator(SparseArrayT & array, index_t index)
+        sparse_array_iterator(SparseArrayT * array, index_t index)
             : _array(array)
             , _index(index)
         { }
@@ -55,9 +60,9 @@ class sparse_array_iterator
 
         reference operator*() const
         {
-            auto it = _array._map.find(_index);
-            if (it  == _array._map.end())
-                return (_array._default); 
+            auto it = _array->_map.find(_index);
+            if (it  == _array->_map.end())
+                return (_array->_default); 
             else
                 return it->second;
         }
@@ -144,7 +149,7 @@ class sparse_array_iterator
         bool operator==(const self_t & other) const
         {
 
-            return (&_array == &(other._array) && _index == other._index);
+            return (_array == (other._array) && _index == other._index);
         }
 
         bool operator!=(const self_t & other) const
@@ -180,7 +185,7 @@ class sparse_array_iterator
         }
 
     private:
-        SparseArrayT & _array;
+        SparseArrayT * _array;
         index_t _index;
 };
 
@@ -191,9 +196,10 @@ class sparse_array_proxy_ref
     typedef sparse_array_proxy_ref<SparseArrayT>    self_t;
     typedef typename SparseArrayT::value_t          value_t;
 
+
     sparse_array_proxy_ref() = delete;
 
-    sparse_array_proxy_ref(SparseArrayT & array, size_t index)
+    sparse_array_proxy_ref(SparseArrayT * array, size_t index)
         : _array(array)
         , _index(index)
     {}
@@ -206,9 +212,9 @@ class sparse_array_proxy_ref
     void operator=(const value_t & val)
     {
 //        std::cout << val <<  " inserted at " << _index << "\n";
-        auto it = _array._map.find(_index);
-        if (it  == _array._map.end())
-            _array._map.insert({_index, val});
+        auto it = _array->_map.find(_index);
+        if (it  == _array->_map.end())
+            _array->_map.insert({_index, val});
         else
             it->second = val;
     }
@@ -227,16 +233,30 @@ class sparse_array_proxy_ref
     operator const value_t & () const
     {
 //        std::cout << "read at " << _index << "\n";
-        auto it = _array._map.find(_index);
-        if (it  == _array._map.end())
-            return (_array._default); 
+        auto it = _array->_map.find(_index);
+        if (it  == _array->_map.end())
+            return (_array->_default); 
         else
             return it->second;
     }
 
+    bool operator==(const value_t & rhs) const {
+        return static_cast<const value_t &>(*this) == rhs;
+    }
+
+    bool operator!=(const value_t & rhs) const {
+        return static_cast<const value_t &>(*this) != rhs;
+    }
+
+    void swap(self_t & other)
+    {
+        std::swap(*this, other);
+    }
+
   private:
-    SparseArrayT & _array;
+    SparseArrayT * _array;
     size_t _index;
+    friend void swap <> (self_t & p1, self_t & p2);
 };
 
 } // namespace detail
@@ -249,6 +269,8 @@ class sparse_array
     typedef sparse_array<T, N>                      self_t;
     typedef T                                       value_t;
     typedef detail::sparse_array_proxy_ref<self_t>  proxy_reference;
+    //const!! 
+    typedef detail::sparse_array_proxy_ref<const self_t>  proxy_const_reference;
     typedef int                                     index_t;
     typedef detail::sparse_array_iterator<self_t>   iterator;
     typedef detail::sparse_array_iterator<const self_t> const_iterator;
@@ -256,6 +278,7 @@ class sparse_array
 
     friend iterator;
     friend proxy_reference;
+    friend proxy_const_reference;
 
   public:
 
@@ -288,7 +311,7 @@ class sparse_array
         if (index >= _size || index < 0)
             throw std::out_of_range("out of range");
 
-        return proxy_reference(*this, index);
+        return proxy_reference(this, index);
     }
 
     const T & operator[](index_t index) const
@@ -323,37 +346,37 @@ class sparse_array
 
     proxy_reference front() 
     {
-        return proxy_reference((*this), 0); 
+        return proxy_reference(this, 0); 
     }
 
     proxy_reference back() 
     {
-        return proxy_reference((*this), size()-1);
+        return proxy_reference(this, size()-1);
     }
 
     iterator begin() 
-    { return iterator(*this, 0); } //small copies! better than saving a whole member that needs to be updated etc!!
+    { return iterator(this, 0); } //small copies! better than saving a whole member that needs to be updated etc!!
 
     const_iterator begin() const
-    { return const_iterator(*this, 0); } //small copies! better than saving a whole member that needs to be updated etc!!
+    { return const_iterator(this, 0); } //small copies! better than saving a whole member that needs to be updated etc!!
 
     const_iterator end() const
-    { return const_iterator(*this, size()); } 
+    { return const_iterator(this, size()); } 
 
     iterator end() 
-    { return iterator(*this, size()); } 
+    { return iterator(this, size()); } 
 
     iterator rbegin()
-    { return iterator(*this, size()-1); }
+    { return iterator(this, size()-1); }
 
     const_iterator rbegin() const
-    { return const_iterator(*this, size()-1); }
+    { return const_iterator(this, size()-1); }
 
     iterator rend() 
-    { return iterator(*this, -1); }
+    { return iterator(&this, -1); }
     
     const_iterator rend() const
-    { return const_iterator(*this, -1); }
+    { return const_iterator(this, -1); }
 
 
     bool empty() const
@@ -426,7 +449,7 @@ class sparse_array
             return end;
       }
 
-//  private:
+  private:
     size_t                                _size;
     std::unordered_map<std::size_t, T>    _map;
     T                                     _default = {};

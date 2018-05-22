@@ -50,8 +50,6 @@ TEST_F(Forward_listTest, Forward_listLIFO)
   v.push_front(111);
   ASSERT_EQ(4,   v.size());
 
-  v.print_list();
-
   LOG_MESSAGE("forward_listTest.forward_listLIFO: pop_front(...)");
   ASSERT_EQ(111, v.pop_front());
   ASSERT_EQ(222, v.pop_front());
@@ -70,9 +68,14 @@ TEST_F(Forward_listTest, MoveSemantics)
   v1.push_front(34);
   v1.push_front(12);
 
+  LOG_MESSAGE("forward_listTest.MoveSemantics: assign");
   v2 = v1;
 
+  LOG_MESSAGE("forward_listTest.MoveSemantics: equals");
+  ASSERT_EQ(1, v1 == v2);
+
   ASSERT_EQ(2, v1.size());
+  //ASSERT_EQ(1, v1 == v2);
 
   LOG_MESSAGE("forward_listTest.MoveSemantics: move assignment operator");
 

@@ -14,6 +14,9 @@ namespace cpppc {
  //   ValueT   default_value = ValueT()>
   class forward_list {
     typedef forward_list<ValueT, default_value> self_t;
+//    typedef typename forward_list<const ValueT, default_value>::iterator const_iterator;
+    //typedef forward_list_t::iterator iterator;
+
 
   public:
     struct forward_list_node {
@@ -35,8 +38,8 @@ namespace cpppc {
 
        iterator() = delete;
 
-       iterator(forward_list_node & _node)
-       : _forward_list_node(&_node)
+       iterator(forward_list_node * _node) //todo pointer!!!!
+       : _forward_list_node(_node)
        { }
 
 
@@ -61,7 +64,7 @@ namespace cpppc {
 
        bool operator==(const iterator rhs) const
        {
-	   return (this == &rhs || _forward_list_node == rhs._forward_list_node);
+           return (this == &rhs || _forward_list_node == rhs._forward_list_node);
        }
 
        bool operator!=(const iterator rhs) const
@@ -72,13 +75,11 @@ namespace cpppc {
     private:
        forward_list_node * _forward_list_node;
 
-    };
+        };
 
     
   public:
     forward_list()
-    : _begin(iterator((*this)._tail))
-    , _end(iterator((*this)._tail))
     { }
 
     //copy constructor
@@ -86,10 +87,8 @@ namespace cpppc {
     
     //move constructor
     forward_list(self_t && other)
-        : _size(other._size)
-        , _head(other._head)
-        , _begin(iterator((*this)._tail))
-        , _end(iterator((*this)._tail))
+        : _head(other._head)
+        , _size(other._size)
       {
     std::cout << "other head next: " << other._head->next << "\n";
     std::cout << "other head value: " << other._head->value << "\n";
@@ -97,8 +96,6 @@ namespace cpppc {
     std::cout << "head next: " << _head->next << "\n";
           other._size = 0;
           other._head = NULL;
-          other._begin = (iterator(other._tail));
-          other._end = (iterator(other._tail));
       } 
 
     //copy assignment
@@ -115,11 +112,6 @@ namespace cpppc {
         _head = other._head;
         other._head = nullptr;
         
-        _begin = other._begin;
-        other._begin = (iterator(other._tail));
-
-        _end = other._end;
-        other._end = (iterator(other._tail));
     std::cout << "head value: " << _head->value << "\n";
     std::cout << "head next: " << _head->next << "\n";
 
@@ -128,67 +120,69 @@ namespace cpppc {
 
     bool operator==(const self_t & other) const
     {
-	//TODO compare begin and end
-	if (this == &other) //identity
-	    return true;
+        if (this == &other) //identity
+            return true;
 
-	else if ((*this).size() != other.size())
-	    return false;
+        else if ((*this).size() != other.size())
+            return false;
 
-	else if ((*this).size() == 0) //hacky
-	    return true;
+        else if ((*this).size() == 0) //hacky
+            return true;
 
-	iterator ithis = begin();
-	iterator iother  = other.begin();
+        iterator ithis = begin();
+        iterator iother  = other.begin();
 
-	while (ithis != (*this).end() && iother != other.end())
-	{
-	    if (*ithis != *iother)
-		return false;
-	    ++ithis;
-	    ++iother;
-	}
+        while (ithis != (*this).end() && iother != other.end())
+        {
+            std::cout << "value of this: " << *ithis << "\n"; 
+            if (*ithis != *iother)
+                return false;
+            ++ithis;
+            ++iother;
+        }
 
-	return true; 
+        return true; 
     }
 
-    iterator begin() const 
+    iterator begin() const
     { 
-	return _begin; 
+        return iterator(_head); 
     }
 
-    iterator end() const 
+    iterator end() const
     { 
-	return _end; 
+        return iterator(NULL); 
     }
+
+//    const_iterator begin() const 
+//    { 
+//        return iterator(_head); 
+//    }
+//
+//    const_iterator end() const 
+//    { 
+//        return iterator(NULL); 
+//    }
 
     size_t size() const
     {
-	return _size;
-//	size_t count = 0;
-//	for(iterator i = *this.begin(); i!=*this.end(); ++i)
-//	{
-//		++count;	
-//	}
-//	return count;
+        return _size;
     }
 
     bool empty() const
     {
-//	return (_head == _tail);
-	return (_size == 0);
+        return (_size == 0);
     }
 
     const ValueT & front() const
     {
-	return _head->value;
+        return _head->value;
     }
 
     void push_front(const ValueT value)
     {
-	_head = new forward_list_node{_head, value};
-	_begin = iterator(*_head);
-	++_size;
+        _head = new forward_list_node{_head, value};
+        ++_size;
     }
 
     ValueT pop_front()
@@ -196,45 +190,22 @@ namespace cpppc {
 	if (size() == 0)
 	    return default_value;
 
-    std::cout << "marker \n";
 	forward_list_node * tmp = _head;
 	ValueT val = tmp->value;
 //	_head = _head->next;
 	_head = tmp->next;
-    std::cout << "tmp next: " << tmp->next << "\n";
-    std::cout << "tmp value: " << tmp->value << "\n";
-    std::cout << "head value: " << _head->value << "\n";
+//    std::cout << "tmp next: " << tmp->next << "\n";
+//    std::cout << "tmp value: " << tmp->value << "\n";
+//    std::cout << "head value: " << _head->value << "\n";
 	delete tmp;
 
-	_begin = iterator(*_head);
 	--_size;
 	return val;
     }
-
-    void print_list()
-    {
-	iterator i = begin();
-	int stop = 10;
-
-	std::cout << "list: ";
-	while (i != end() && stop != 0)
-	{
-	    std::cout << *i << " ";
-	    ++i;
-	    --stop;
-	}
-	    std::cout << "\n";
-    }
 	
   private:
-    // same as = { }
-    forward_list_node _tail = { nullptr, default_value };
-    forward_list_node * _head = &_tail;
+    forward_list_node * _head = NULL;// = &_tail;
     size_t _size = 0;
-
-
-    iterator  _begin;
-    iterator  _end;
   };
 
 }

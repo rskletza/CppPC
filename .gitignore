@@ -1,0 +1,9 @@
+
+#ignore object files, binaries and vim swp files
+*.o
+*.bin
+*.swp
+
+#ignore tags files
+.tags
+tags
