@@ -265,7 +265,23 @@ class sparse_array
 
     sparse_array(const self_t & other) = default;
 
+    sparse_array(self_t && other)
+    : _size(other._size)
+    , _map(std::move(other._map))
+    {
+        other._size = 0;
+    }
+
     self_t & operator=(const self_t & other) = default; //rule of 0!
+
+    self_t & operator=(self_t && other)
+    {
+        _size = other._size; //actually, this shouldn't be necessary as sparse arrays of the same type also have the same size
+        other._size = 0;
+        _map = std::move(other._map);
+
+        return *this;
+    }
 
     proxy_reference operator[](index_t index)
     {
@@ -410,7 +426,7 @@ class sparse_array
             return end;
       }
 
-  private:
+//  private:
     size_t                                _size;
     std::unordered_map<std::size_t, T>    _map;
     T                                     _default = {};

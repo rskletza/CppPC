@@ -81,8 +81,50 @@ namespace cpppc {
     , _end(iterator((*this)._tail))
     { }
 
+    //copy constructor
     forward_list(const self_t & other) = default;
+    
+    //move constructor
+    forward_list(self_t && other)
+        : _size(other._size)
+        , _head(other._head)
+        , _begin(iterator((*this)._tail))
+        , _end(iterator((*this)._tail))
+      {
+    std::cout << "other head next: " << other._head->next << "\n";
+    std::cout << "other head value: " << other._head->value << "\n";
+    std::cout << "head value: " << _head->value << "\n";
+    std::cout << "head next: " << _head->next << "\n";
+          other._size = 0;
+          other._head = NULL;
+          other._begin = (iterator(other._tail));
+          other._end = (iterator(other._tail));
+      } 
+
+    //copy assignment
     self_t & operator=(const self_t & rhs) = default;
+
+    //move assignment
+    self_t & operator=(self_t && other)
+    {
+    std::cout << "other head next: " << other._head->next << "\n";
+    std::cout << "other head value: " << other._head->value << "\n";
+        _size = other._size;
+        other._size = 0;
+
+        _head = other._head;
+        other._head = nullptr;
+        
+        _begin = other._begin;
+        other._begin = (iterator(other._tail));
+
+        _end = other._end;
+        other._end = (iterator(other._tail));
+    std::cout << "head value: " << _head->value << "\n";
+    std::cout << "head next: " << _head->next << "\n";
+
+    return *this;
+    }
 
     bool operator==(const self_t & other) const
     {
@@ -139,7 +181,7 @@ namespace cpppc {
 
     const ValueT & front() const
     {
-	return _head.value;
+	return _head->value;
     }
 
     void push_front(const ValueT value)
@@ -154,9 +196,14 @@ namespace cpppc {
 	if (size() == 0)
 	    return default_value;
 
+    std::cout << "marker \n";
 	forward_list_node * tmp = _head;
 	ValueT val = tmp->value;
-	_head = _head->next;
+//	_head = _head->next;
+	_head = tmp->next;
+    std::cout << "tmp next: " << tmp->next << "\n";
+    std::cout << "tmp value: " << tmp->value << "\n";
+    std::cout << "head value: " << _head->value << "\n";
 	delete tmp;
 
 	_begin = iterator(*_head);

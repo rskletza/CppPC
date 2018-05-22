@@ -59,3 +59,40 @@ TEST_F(Forward_listTest, Forward_listLIFO)
   ASSERT_EQ(444, v.pop_front());
   ASSERT_EQ(0,   v.size());
 }
+
+TEST_F(Forward_listTest, MoveSemantics)
+{
+  LOG_MESSAGE("forward_listTest.MoveSemantics: new");
+  forward_list<int> v1;
+  forward_list<int> v2;
+  forward_list<int> v3;
+
+  v1.push_front(34);
+  v1.push_front(12);
+
+  v2 = v1;
+
+  ASSERT_EQ(2, v1.size());
+
+  LOG_MESSAGE("forward_listTest.MoveSemantics: move assignment operator");
+
+  v3 = std::move(v1);
+
+  ASSERT_EQ(2, v3.size());
+  ASSERT_EQ(0, v1.size());
+
+  ASSERT_EQ(12, v3.front());
+  v3.pop_front();
+  ASSERT_EQ(34, v3.front());
+
+  LOG_MESSAGE("forward_listTest.MoveSemantics: move constructor");
+
+  auto v4 = forward_list<int>(std::move(v2));
+
+  ASSERT_EQ(2, v4.size());
+  ASSERT_EQ(0, v2.size());
+
+  ASSERT_EQ(12, v4.front());
+  v4.pop_front(); //error
+  ASSERT_EQ(34, v4.front());
+}
