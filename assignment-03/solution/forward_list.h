@@ -29,6 +29,8 @@ namespace cpppc {
        typedef typename forward_list_t::forward_list_node forward_list_node_t;
        typedef typename forward_list_t::iterator self_t;
 
+    friend forward_list; //I need this for insert_after 
+
     public:
        using iterator_category = std::forward_iterator_tag;
        using value_type = ValueT;
@@ -90,32 +92,44 @@ namespace cpppc {
         : _head(other._head)
         , _size(other._size)
       {
-    std::cout << "other head next: " << other._head->next << "\n";
-    std::cout << "other head value: " << other._head->value << "\n";
-    std::cout << "head value: " << _head->value << "\n";
-    std::cout << "head next: " << _head->next << "\n";
           other._size = 0;
           other._head = NULL;
       } 
 
     //copy assignment
-    self_t & operator=(const self_t & rhs) = default;
+    self_t & operator=(const self_t & rhs)
+    {
+        //free old list elements
+        while (!empty())
+        {
+            pop_front();
+        }
+
+        auto lastelem = begin();
+        for (auto i = rhs.begin(); i != rhs.end(); ++i)
+        {
+            lastelem = insert_after(lastelem, *i);
+        }
+
+        return *this;
+    }
 
     //move assignment
     self_t & operator=(self_t && other)
     {
-    std::cout << "other head next: " << other._head->next << "\n";
-    std::cout << "other head value: " << other._head->value << "\n";
+        //free old list elements
+        while (size() != 0)
+        {
+            pop_front();
+        }
+
         _size = other._size;
         other._size = 0;
 
         _head = other._head;
         other._head = nullptr;
-        
-    std::cout << "head value: " << _head->value << "\n";
-    std::cout << "head next: " << _head->next << "\n";
 
-    return *this;
+        return *this;
     }
 
     bool operator==(const self_t & other) const
@@ -134,7 +148,7 @@ namespace cpppc {
 
         while (ithis != (*this).end() && iother != other.end())
         {
-            std::cout << "value of this: " << *ithis << "\n"; 
+            //std::cout << "value of this: " << *ithis << "\n"; 
             if (*ithis != *iother)
                 return false;
             ++ithis;
@@ -201,6 +215,23 @@ namespace cpppc {
 
 	--_size;
 	return val;
+    }
+
+    iterator insert_after(iterator pos, const ValueT value)
+    {
+//        if (*pos == nullptr && size() != 0) //tail
+//        throw exception
+            
+        if (size() == 0) //--> empty list
+        {
+            push_front(value);
+            return _head;
+        }
+
+        auto aux = pos._forward_list_node->next;
+        auto ret = pos._forward_list_node->next = new forward_list_node{aux, value};
+        ++_size;
+        return iterator(ret);
     }
 	
   private:

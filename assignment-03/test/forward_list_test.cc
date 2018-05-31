@@ -22,6 +22,10 @@ TEST_F(Forward_listTest, StandardConcept)
   v1.push_front(34);
   v1.push_front(12);
 
+ // LOG_MESSAGE("forward_listTest.StandardConcept: insert_after");
+ // auto i = v1.insert_after(v1.begin(), 12);
+ // v1.insert_after(i, 34);
+
   ASSERT_EQ(12, *(v1.begin()));
   ASSERT_EQ(34, *(++v1.begin()));
 
@@ -70,6 +74,7 @@ TEST_F(Forward_listTest, MoveSemantics)
 
   LOG_MESSAGE("forward_listTest.MoveSemantics: assign");
   v2 = v1;
+  v3 = v2;
 
   LOG_MESSAGE("forward_listTest.MoveSemantics: equals");
   ASSERT_EQ(1, v1 == v2);
