@@ -58,6 +58,7 @@ TEST_F(SparseArrayTest, RandomAccess)
   auto it = sa.begin() + 621;
 
   *it  = 123;
+  ASSERT_EQ(sa[621], 123);
 
   sa.printmap();
 
@@ -131,7 +132,7 @@ TEST_F(SparseArrayTest, ArrayInterface)
                 sa2.begin() + 220 + 16,
                 [&](int v) { ASSERT_EQ(idx *= 2, v); });
 
-//  std::sort(sa2.begin(), sa2.end());
+  std::sort(sa2.begin(), sa2.end());
 
   idx = 2;
   std::for_each(sa2.begin(),

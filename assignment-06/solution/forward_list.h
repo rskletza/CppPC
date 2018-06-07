@@ -10,13 +10,18 @@ namespace cpppc {
   template <typename ValueT, ValueT default_value = ValueT()>
   class forward_list;
 
+    template <class ListType>
+    class flist_iterator : public forward_iterator_base<flist_iterator<ListType>, IndexType>
+
   // forward_list<int32_t, -1>
   template <typename ValueT, ValueT default_value>
  //   ValueT   default_value = ValueT()>
   class forward_list {
-    typedef forward_list<ValueT, default_value> self_t;
+//    typedef forward_list<ValueT, default_value> self_t;
 //    typedef typename forward_list<const ValueT, default_value>::iterator const_iterator;
     //typedef forward_list_t::iterator iterator;
+    using self_t = forward_list<ValueT, default_value>;
+    using iterator = flist_iterator<self_t>;
 
 
   public:
@@ -25,23 +30,24 @@ namespace cpppc {
        ValueT      value;
     };
     // forward_list<T>::iterator
-    class flist_iterator : forward_iterator_base<
-                           flist_iterator, 
-                           forward_list_node*,
-                           ValueT,
-                           std::ptrdiff_t,
-                           ValueT *
-                           ValueT &
+    template <class ListType>
+    class flist_iterator : public forward_iterator_base<flist_iterator<ListType>, IndexType>
+//                           flist_iterator, 
+//                           forward_list_node*,
+//                           ValueT,
+//                           std::ptrdiff_t,
+//                           ValueT *
+//                           ValueT &
     >{
-       typedef forward_list<ValueT, default_value> forward_list_t;
-       typedef typename forward_list_t::forward_list_node forward_list_node_t;
-       typedef typename forward_list_t::flist_iterator self_t;
+       using forward_list_t = forward_list<ValueT, default_value>;
+       using forward_list_node_t = forward_list_t::forward_list_node;
+       using self_t forward_list_t::flist_iterator<ListType>;
 
     friend forward_list; //I need this for insert_after 
 
     public:
        using iterator_category = std::forward_iterator_tag;
-       using value_type = ValueT;
+       using value_type = typename ListType::value_type;
        using difference_type = std::ptrdiff_t;
        using pointer = value_type *;
        using reference = value_type &;
@@ -58,12 +64,12 @@ namespace cpppc {
            { }
 
 
-           flist_iterator & operator++() {
+           flist_iterator & increment() {
               _forward_list_node = _forward_list_node->next;
               return *this;
            }
 
-           flist_iterator operator++(int) {
+           flist_iterator increment(int) {
               flist_iterator old = *this;
               _forward_list_node = _forward_list_node->next;
               return old;
@@ -157,8 +163,8 @@ namespace cpppc {
             else if ((*this).size() == 0) //hacky
                 return true;
 
-            flist_iterator ithis = begin();
-            flist_iterator iother  = other.begin();
+            iterator ithis = begin();
+            iterator iother  = other.begin();
 
             while (ithis != (*this).end() && iother != other.end())
             {
@@ -172,24 +178,24 @@ namespace cpppc {
             return true; 
         }
 
-        flist_iterator begin() const
+        iterator begin() const
         { 
-            return flist_iterator(_head); 
+            return iterator(_head); 
         }
 
-        flist_iterator end() const
+        iterator end() const
         { 
-            return flist_iterator(NULL); 
+            return iterator(NULL); 
         }
 
     //    const_iterator begin() const 
     //    { 
-    //        return flist_iterator(_head); 
+    //        return iterator(_head); 
     //    }
     //
     //    const_iterator end() const 
     //    { 
-    //        return flist_iterator(NULL); 
+    //        return iterator(NULL); 
     //    }
 
         size_t size() const
@@ -231,7 +237,7 @@ namespace cpppc {
         return val;
         }
 
-        flist_iterator insert_after(iterator pos, const ValueT value)
+        iterator insert_after(iterator pos, const ValueT value)
         {
     //        if (*pos == nullptr && size() != 0) //tail
     //        throw exception
@@ -245,7 +251,7 @@ namespace cpppc {
             auto aux = pos._forward_list_node->next;
             auto ret = pos._forward_list_node->next = new forward_list_node{aux, value};
             ++_size;
-        return flist_iterator(ret);
+        return iterator(ret);
     }
 	
   private:

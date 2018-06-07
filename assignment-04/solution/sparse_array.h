@@ -16,11 +16,11 @@ class sparse_array;
 template <class SparseArrayT>
 class sparse_array_proxy_ref;
 
-template<typename T>
-void swap(sparse_array_proxy_ref<T> p1, sparse_array_proxy_ref<T> p2)
-{
-    p1.swap(p2);
-}
+//template<typename T>
+//void swap(sparse_array_proxy_ref<T> p1, sparse_array_proxy_ref<T> p2)
+//{
+//    p1.swap(p2);
+//}
 
 template <class SparseArrayT>
 class sparse_array_iterator
@@ -256,7 +256,7 @@ class sparse_array_proxy_ref
   private:
     SparseArrayT * _array;
     size_t _index;
-    friend void swap <> (self_t & p1, self_t & p2);
+//    friend void swap <> (self_t & p1, self_t & p2);
 };
 
 } // namespace detail
@@ -396,6 +396,7 @@ class sparse_array
     void swap(self_t & other)
     {
         std::swap_ranges(_map.begin(), _map.end(), other._map.begin(), other._map.end());
+        std::swap(_size, other._size);
     }
 
     void printmap()
@@ -454,6 +455,20 @@ class sparse_array
     std::unordered_map<std::size_t, T>    _map;
     T                                     _default = {};
 };
+
+template <class T, std::size_t N>
+void swap(sparse_array<T,N> a, sparse_array<T,N> b)
+{
+    a.swap(b);
+}
+
+template <class T, std::size_t N>
+void swap(detail::sparse_array_proxy_ref<sparse_array<T,N>> a, 
+           detail::sparse_array_proxy_ref<sparse_array<T,N>> b)
+{
+    a.swap(b); 
+}
+
 
 } // namespace cpppc
 
