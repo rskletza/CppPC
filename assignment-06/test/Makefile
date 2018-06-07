@@ -1,7 +1,7 @@
 
 CC=g++ #clang++
-CFLAGS=--std=c++11 -Wall -Wextra -pedantic -g
-LDFLAGS=-lpthread -L${GTEST_BASE}/lib -lgtest
+CFLAGS=--std=c++11 -Wall -Wextra -pedantic -g -fPIC
+LDFLAGS=-lpthread -L${GTEST_BASE}/lib -lgtest -fPIC
 
 INCLUDES=-I${GTEST_BASE}/include -I../
 
