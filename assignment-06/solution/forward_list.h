@@ -11,8 +11,7 @@ namespace cpppc {
   class forward_list;
 
     template <class ListType>
-    class flist_iterator : public forward_iterator_base<flist_iterator<ListType>, IndexType>
-
+    class flist_iterator;
   // forward_list<int32_t, -1>
   template <typename ValueT, ValueT default_value>
  //   ValueT   default_value = ValueT()>

@@ -8,7 +8,7 @@ namespace cpppc {
 template <
     class IteratorType,
 //    class ValueType = typename IteratorType::value_type, 
-    class IndexType,
+    class IndexType >
 //    class Pointer = ValueType *,
 //    class Reference = ValueType & >
 class forward_iterator_base
