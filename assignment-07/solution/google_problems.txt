@@ -1,0 +1,3 @@
+only works for vectors --> use iterators instead!
+
+not well parallelizable at all --> first fill complement container (parallelizable), then check for special case (half), then check if the complement contains the inverse for each element of the range (parallelizable)
