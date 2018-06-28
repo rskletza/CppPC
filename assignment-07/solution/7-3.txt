@@ -1,0 +1,37 @@
+7-3-1)
+
+- std::sort and std::partition are not in "Modifying Sequence Operation"
+-                                  in Sorting/Partitioning Operations
+--> why? possibly because these operations belong more into the area of "views" instead of actual modifiers 
+
+std::partial_sort_copy copies a "range" and sorts it. This seems like a workaround for what we want to have with ranges and views. (other examples are unique copy, remove copy, replace_copy, etc)
+
+use-case?
+
+7-3-2)
+
+algorithms that allow adding or removing elements from their input ranges:
+    remove algos, swap algos (implicitly), unique, etc
+
+depending on the container, the iterator can be 
+    a pointer to an element (eg list) that iterates by being reassigned to the "next" field of the list
+    a pointer to an element in contiguous memory (eg vector) that iterates by jumping to the next address
+    ...
+
+Iterator invalidation rules:
+
+std::vector
+    clear, assign --> iterators always invalidated
+    reserve, shrink_to_fit, push_back, emplace_back, ... --> invalidated if vector changes size, otherwise not
+    erase, pop_back --> erased element(s) and end()
+
+std::list
+    only an iterator pointing to a node that is deleted is invalidated, otherwise none are
+
+std::deque
+    insertion and deletion at either end never invalidates pointers or references to the rest of the elements (so comparable to std::list)
+
+std::map
+    no information on cppreference, but presumably like std::list
+
+
