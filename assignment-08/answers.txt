@@ -40,5 +40,26 @@ A concept that must be fulfilled for this to work is RAII (Resource Allocation i
 2.1
 The problem is the type of access used in the function (it+1). This is random access and only supplied by RandomAccessIterators and not by all others (Bidirectional, Forward, Input). In order to make the function work for all iterators, it's necessary to use ++i.
 
-2.2
+// Shared vector instance accessed by thread A and thread B:
+std::vector<int> v;
 
+// thread A:                    | thread B:                    | thread safe? | why?
+// =============================|==============================|==============|
+   std::vector<int> a;          | std::vector<int> b;          | yes          | two different vectors are constructed, there is no interference (1.) 
+// -----------------------------+------------------------------+--------------+ 
+   int xa = v[3];               | int xb = v[4];               | yes          |  const member functions (such as read-only access) are thread-safe (2.)
+// -----------------------------+------------------------------+--------------+
+   v[3] = 123;                  | v[4] = 345;                  | yes          |  different elements in the same container can be modified concurrently by different threads (3.)
+// -----------------------------+------------------------------+--------------+
+   v[3] = 123;                  | int xb = v[3];               | no           | concurrent access and modification (violates 5.)
+// -----------------------------+------------------------------+--------------+
+   v.push_back(24);             | v.size();                    | no           | concurrent access and modification (violates 5.) 
+// -----------------------------+------------------------------+--------------+
+   v.back();                    | v.push_back(54);             | no          | concurrent access and modification (violates 5.), also possibly iterator invalidation 
+// -----------------------------+------------------------------+--------------+
+   v.begin();                   | v.push_back(34);             | (no)         | only safe if iterators are not invalidated --> the new size is not larger than the current capacity
+// -----------------------------+------------------------------+--------------+
+   v.back();                    | v.pop_back();                | no?          | concurrent access and modification (violates 5.), also possibly iterator invalidation  
+// -----------------------------+------------------------------+--------------+
+
+The numbers in parentheses are from cppreference (https://en.cppreference.com/w/cpp/container#Thread_safety)
